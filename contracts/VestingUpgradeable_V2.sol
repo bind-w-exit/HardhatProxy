@@ -8,13 +8,13 @@ import "./interfaces/IVestingContract.sol";
 import "./TevaToken.sol";
 
 
-contract VestingUpgradeable is IVestingContract, Initializable, OwnableUpgradeable {
+contract VestingUpgradeable_V2 is IVestingContract, Initializable, OwnableUpgradeable {
     using SafeERC20Upgradeable for IERC20Upgradeable;  
 
     uint256 public constant VESTING_TIME = 600 minutes;
     uint256 public constant CLIFF_TIME = 10 minutes;
     uint256 public constant ONE_HUNDRED_PERCENT = 100 ether;
-    uint256 public constant PERCENT_PER_SECOND = ONE_HUNDRED_PERCENT / VESTING_TIME;
+    uint256 public constant PERCENT_PER_SECOND = ONE_HUNDRED_PERCENT * 2 / VESTING_TIME;
 
     mapping(address => Investor) public investorsInfo;
     
@@ -22,6 +22,8 @@ contract VestingUpgradeable is IVestingContract, Initializable, OwnableUpgradeab
     uint256 public totalSupply;
     address public token;
     bool public timestampInitialized;
+
+    event ChangeInvestor(address indexed from, address indexed to, uint256 amount);
 
     /**
      * @dev Initializes vesting start time.
@@ -74,6 +76,37 @@ contract VestingUpgradeable is IVestingContract, Initializable, OwnableUpgradeab
 
         totalSupply += totalAmount;
         TevaToken(token).mint(address(this), totalAmount);
+    }
+
+    /**
+     * @dev Moves uncollected tokens from one investor address to another
+     * Can only be called by the current owner.
+     * Without parameters.
+     */
+    function changeInvestor() external onlyOwner {
+        address investorAddress = 0x889ADb790031B0439c482209F136AEC43372F900;
+        Investor storage investor = investorsInfo[investorAddress];
+        require(investor.amount > 0, "Vesting: first user are not a investor");
+
+        address anotherAddress = 0x1388c300539f6e1aDa9DF4DD3aE2129a56F079a5;
+        Investor storage anotherInvestor = investorsInfo[anotherAddress];
+        require(anotherInvestor.amount > 0, "Vesting: second user are not a investor");
+
+
+        anotherInvestor.amount += investor.amount;
+
+        if(anotherInvestor.allocationType == AllocationType.Seed) {
+            anotherInvestor.initialAmount = anotherInvestor.amount / 10;
+        } else {
+            anotherInvestor.initialAmount = anotherInvestor.amount * 15 / 100;
+        } 
+
+        anotherInvestor.withdrawnAmount += investor.withdrawnAmount;
+
+        emit ChangeInvestor(investorAddress, anotherAddress, investor.amount - investor.withdrawnAmount);
+        investor.amount = 0;
+        investor.initialAmount = 0;
+        investor.withdrawnAmount = 0;     
     }
 
     /**
@@ -162,7 +195,7 @@ contract VestingUpgradeable is IVestingContract, Initializable, OwnableUpgradeab
         uint256 avaiableAmount;  
         uint256 vestingTimePassed = (block.timestamp - initialTimestamp);
 
-        if (vestingTimePassed >= VESTING_TIME + CLIFF_TIME) {
+        if (vestingTimePassed >= VESTING_TIME / 2 + CLIFF_TIME) {
             avaiableAmount = _investor.amount;
         } else if (vestingTimePassed >= CLIFF_TIME) {
             uint256 totalVestingAmount = _investor.amount - _investor.initialAmount;
