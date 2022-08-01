@@ -2,24 +2,29 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-    "txHash": "0xf2392e5027196909401efb0e500e6333632aa3590a12b75aad6e7aacf7e3f75d"
+    "txHash": "0xe346525abd89ddbb5365101b0e2634ffd48042fdf7861a856828e1f558088fc5"
   },
   "proxies": [
     {
-      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0xad0ab556e0993a677904e14b4ba4daf518c5182c63f4fbaef4bae1d6040be3fe",
+      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "txHash": "0x84966607d1207953134d6870c7e07fec0ac6081e7cac7e7e89b7c800ef3e3ee5",
       "kind": "transparent"
     },
     {
-      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
-      "txHash": "0x84966607d1207953134d6870c7e07fec0ac6081e7cac7e7e89b7c800ef3e3ee5",
+      "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+      "txHash": "0xf3a97de2a6a7e3f1387a4b7ae28ee20c538c11f123bd846d547ec54b74c02343",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "txHash": "0x6653cdbc8c88cff7dd8f0b070bb94783ff1b04dc10d6cfdf50ceb697956ad7a8",
       "kind": "transparent"
     }
   ],
   "impls": {
     "9308a511500af1ba888cccc6927362a43f94cbf77981ad7856d04ff3b64661c0": {
-      "address": "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-      "txHash": "0x74d436854c5a049cb83fab416acc2cb70624e0680d25e4efdb9467b19c8f9cff",
+      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "txHash": "0x5c62a62bded0ba38e9d95eba74e4e503fc0bdaf6ebcd52014fada6df4e9aa979",
       "layout": {
         "storage": [
           {
@@ -175,8 +180,8 @@
       }
     },
     "56159d56a1c3de87cffca270dabe275c15dee5fac6158d73928ffb585da5fa66": {
-      "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0xb71e398c45a5466378ef898c5161f9a0ac8a9948e3dc461b8a09db189beaa88d",
+      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "txHash": "0x41923e74f09ba8c0db93a32cc33ba133d5dfdc1a07fbe7ed1d168e8c2bc1e6f3",
       "layout": {
         "storage": [
           {

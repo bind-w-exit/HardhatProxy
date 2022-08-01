@@ -23,6 +23,7 @@ describe("Vesting Contract V2", function () {
 
   let TevaToken: ContractFactory;
   let tevaToken: Contract;
+  let VestingContract: ContractFactory;
   let VestingContract_V2: ContractFactory;
   let vestingContractProxy: Contract;
   let snapshotA: any;
@@ -39,9 +40,12 @@ describe("Vesting Contract V2", function () {
     [owner, user1, user2, user3] = await ethers.getSigners();
 
     TevaToken = await ethers.getContractFactory("TevaToken");
+    VestingContract = await ethers.getContractFactory("VestingUpgradeable");
     VestingContract_V2 = await ethers.getContractFactory("VestingUpgradeable_V2");
     tevaToken = await TevaToken.deploy();
-    vestingContractProxy = await upgrades.deployProxy(VestingContract_V2, [tevaToken.address]);
+    let instance = await upgrades.deployProxy(VestingContract, [tevaToken.address]);
+    vestingContractProxy = await upgrades.upgradeProxy(instance.address, VestingContract_V2);
+
     
 
     await tevaToken.addMinter(vestingContractProxy.address);
