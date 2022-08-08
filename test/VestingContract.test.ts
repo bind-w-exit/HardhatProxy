@@ -338,7 +338,6 @@ describe("Vesting Contract", function () {
         );
       });
 
-
       //emergencyWithdraw
       it("should transfer tokens back to the owner", async () => {
         await vestingContractProxy.addInvestors([user1.address], [AMOUNT], 1);

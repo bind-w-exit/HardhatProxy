@@ -46,8 +46,6 @@ describe("Vesting Contract V2", function () {
     let instance = await upgrades.deployProxy(VestingContract, [tevaToken.address]);
     vestingContractProxy = await upgrades.upgradeProxy(instance.address, VestingContract_V2);
 
-    
-
     await tevaToken.addMinter(vestingContractProxy.address);
     
     snapshotA = await snapshot();
@@ -170,7 +168,6 @@ describe("Vesting Contract V2", function () {
 
 
       //changeInvestor
-
       it("should move the amount of uncollected tokens from one investor address to another", async () => {
         let investorAddress = "0x889ADb790031B0439c482209F136AEC43372F900"
         let anotherAddress = "0x1388c300539f6e1aDa9DF4DD3aE2129a56F079a5"

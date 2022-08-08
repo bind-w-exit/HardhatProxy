@@ -1,0 +1,31 @@
+▶️
+    PS C:\Users\12And\Desktop\solidity\HardhatProxy> npx hardhat run scripts/deploy.ts --network ropsten_infura
+    TEVA Token deployed to: 0x4C5D89caAbe920038D998d38bDF28E6d7CC96bD8
+    Vesting Contract Proxy deployed to: 0x8dEa60739be461a1401cEBf11cBf7cdB28213159
+    Vesting Contract Implementation deployed to: 0xd04349f9C024Fd55f7Ac7e2E187eb5DddC5563F1
+▶️
+    PS C:\Users\12And\Desktop\solidity\HardhatProxy> npx hardhat run scripts/upgrade.ts --network ropsten_infura
+    Vesting Contract Implementation_V2 deployed to: 0x1739699539B9eFd3C69eD43C615D3339C51EDB76
+▶️
+    PS C:\Users\12And\Desktop\solidity\HardhatProxy> npx hardhat verify --network ropsten_infura 0xd04349f9C024Fd55f7Ac7e2E187eb5DddC5563F1
+    Nothing to compile
+    No need to generate any newer typings.
+    Successfully submitted source code for contract
+    contracts/VestingUpgradeable.sol:VestingUpgradeable at 0xd04349f9C024Fd55f7Ac7e2E187eb5DddC5563F1
+    for verification on the block explorer. Waiting for verification result...
+
+    Successfully verified contract VestingUpgradeable on Etherscan.
+    https://ropsten.etherscan.io/address/0xd04349f9C024Fd55f7Ac7e2E187eb5DddC5563F1#code
+▶️
+    PS C:\Users\12And\Desktop\solidity\HardhatProxy> npx hardhat verify --network ropsten_infura 0x1739699539B9eFd3C69eD43C615D3339C51EDB76
+    Nothing to compile
+    No need to generate any newer typings.
+    Successfully submitted source code for contract
+    contracts/VestingUpgradeable_V2.sol:VestingUpgradeable_V2 at 0x1739699539B9eFd3C69eD43C615D3339C51EDB76
+    for verification on the block explorer. Waiting for verification result...
+
+    Successfully verified contract VestingUpgradeable_V2 on Etherscan.
+    https://ropsten.etherscan.io/address/0x1739699539B9eFd3C69eD43C615D3339C51EDB76#code
+▶️
+    * Verified proxy on etherscan *
+

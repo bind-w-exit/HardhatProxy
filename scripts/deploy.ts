@@ -3,18 +3,16 @@ import { ethers, upgrades } from "hardhat";
 async function main() {
   const TevaToken = await ethers.getContractFactory("TevaToken");
   const VestingContract = await ethers.getContractFactory("VestingUpgradeable");
-  const VestingContract_V2 = await ethers.getContractFactory("VestingUpgradeable_V2");
-
 
   const tevaToken = await TevaToken.deploy();
   
-  const instance = await upgrades.deployProxy(VestingContract, [tevaToken.address]);
-  const vestingContractProxy = await upgrades.upgradeProxy(instance.address, VestingContract_V2);
-
+  const vestingContractProxy = await upgrades.deployProxy(VestingContract, [tevaToken.address]);
   await vestingContractProxy.deployed();
+  const currentImplAddress = await upgrades.erc1967.getImplementationAddress(vestingContractProxy.address);
 
   console.log("TEVA Token deployed to:", tevaToken.address);
   console.log("Vesting Contract Proxy deployed to:", vestingContractProxy.address);
+  console.log("Vesting Contract Implementation deployed to:", currentImplAddress);
 }
 
 main().catch((error) => {
